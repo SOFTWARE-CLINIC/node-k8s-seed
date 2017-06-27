@@ -5,9 +5,7 @@ language: node_js
 services:
   - docker
 
-after_script:
-  - docker build -t $DOCKER_USERNAME/node-k8s-seed .
-
 after_success:
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push $DOCKER_USERNAME/node-k8s-seed;
+  - docker build -t $DOCKER_USERNAME/node-k8s-seed .
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push $DOCKER_USERNAME/node-k8s-seed;
