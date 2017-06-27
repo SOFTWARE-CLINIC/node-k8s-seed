@@ -1,0 +1,12 @@
+{
+  "name": "node-k8s-seed",
+  "version": "1.0.0",
+  "description": "A seed project for simple Node.js app running on Kubernetes.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
