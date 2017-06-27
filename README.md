@@ -2,6 +2,8 @@
 
 > A seed project for simple Node.js web application running on Kubernetes.
 
+[![Build Status](https://travis-ci.org/SOFTWARE-CLINIC/node-k8s-seed.svg?branch=master)](https://travis-ci.org/SOFTWARE-CLINIC/node-k8s-seed)
+
 ## Create a Minikube cluster
 
 ```

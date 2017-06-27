@@ -1,0 +1,9 @@
+sudo: required
+
+language: node_js
+
+services:
+  - docker
+
+after_script:
+  - docker build -t node-k8s-seed .
