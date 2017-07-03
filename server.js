@@ -1,10 +1,16 @@
-var http = require('http');
+var HTTP_PORT = 8080;
+var express = require('express');
+var app = express();
 
-var handleRequest = function (request, response) {
-  console.log('Received request for URL: ' + request.url);
-  response.writeHead(200);
-  response.end('Hello, World!');
-};
+app.get('/hello', function (request, response) {
+  response.json({message: 'Hello, World!'});
+});
 
-var www = http.createServer(handleRequest);
-www.listen(8080);
+app.get('/env', function (request, response) {
+  response.json(process.env);
+});
+
+app.listen(HTTP_PORT, function () {
+  console.log('Listening on port %d', HTTP_PORT);
+});
+

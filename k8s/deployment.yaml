@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: node-k8s-seed
+spec:
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: node-k8s-seed
+    spec:
+      containers:
+      - name: node-k8s-seed
+        image: danielpacak/node-k8s-seed
+        ports:
+        - containerPort: 8080
+

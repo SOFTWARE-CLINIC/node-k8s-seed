@@ -38,7 +38,7 @@ $ eval $(minikube docker-env)
 > this change by running `eval $(minikube docker-env -u)`.
 
 ```
-$ docker build -t node-k8s-seed:v0.0.1 .
+$ docker build -t node-k8s-seed .
 ```
 
 ## Create a Deployment
@@ -49,10 +49,10 @@ one Container. A Kubernetes Deployment checks on the health of the Pod and
 restarts the Pod's Container if it terminates.
 
 Use the `kubectl run` command to create a Deployment that manages a Pod. The Pod
-runs a Conatiner based on the `node-k8s-seed:v0.0.1` Docker image.
+runs a Conatiner based on the `node-k8s-seed:latest` Docker image.
 
 ```
-$ kubectl run node-k8s-seed --image=node-k8s-seed:v0.0.1 --port=8080
+$ kubectl run node-k8s-seed --image=node-k8s-seed:latest --port=8080
 ```
 
 View the Deployment `$ kubectl get deployments`.
@@ -99,13 +99,13 @@ $ kubectl logs <POD-NAME>
 Modify the app code and build a new version of Docker container image.
 
 ```
-docker build -t node-k8s-seed:v0.0.2 .
+docker build -t node-k8s-seed .
 ```
 
 Update the image of your Deployment
 
 ```
-$ kubectl set image deployment/node-k8s-seed node-k8s-seed=node-k8s-seed:v0.0.2
+$ kubectl set image deployment/node-k8s-seed node-k8s-seed=node-k8s-seed:latest
 ```
 
 Run the app again to view the changes
