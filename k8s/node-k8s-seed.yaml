@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: node-k8s-seed
-        image: node-k8s-seed:0.0.1-alpha-2
+        image: danielpacak/node-k8s-seed:latest
         ports:
         - containerPort: 8080
 ---
