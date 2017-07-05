@@ -10,18 +10,14 @@
 $ minikube start
 ```
 
-Set the Minikube context. The context is what determines which cluster `kubectl`
-is interacting with. You can see all your available contexts in the
-`~/.kube/config` file.
-
-```
-$ kubectl config use-context minikube
-```
-
 Verify that `kubectl` is configured to communicate with your cluster.
 
 ```
 $ kubectl cluster-info
+```
+
+```
+$ minikube dashboard
 ```
 
 ## Create a Docker container image
@@ -38,7 +34,7 @@ $ eval $(minikube docker-env)
 > this change by running `eval $(minikube docker-env -u)`.
 
 ```
-$ docker build -t node-k8s-seed .
+$ docker build -t node-k8s-seed:0.0.1-alpha-1 .
 ```
 
 ## Create a Deployment
@@ -49,10 +45,10 @@ one Container. A Kubernetes Deployment checks on the health of the Pod and
 restarts the Pod's Container if it terminates.
 
 Use the `kubectl run` command to create a Deployment that manages a Pod. The Pod
-runs a Conatiner based on the `node-k8s-seed:latest` Docker image.
+runs a Conatiner based on the `node-k8s-seed:0.0.1-alpha-1` Docker image.
 
 ```
-$ kubectl run node-k8s-seed --image=node-k8s-seed:latest --port=8080
+$ kubectl run node-k8s-seed --image=node-k8s-seed:0.0.1-alpha-1 --port=8080
 ```
 
 View the Deployment `$ kubectl get deployments`.
@@ -99,13 +95,13 @@ $ kubectl logs <POD-NAME>
 Modify the app code and build a new version of Docker container image.
 
 ```
-docker build -t node-k8s-seed .
+docker build -t node-k8s-seed:0.0.1-alpha-2 .
 ```
 
 Update the image of your Deployment
 
 ```
-$ kubectl set image deployment/node-k8s-seed node-k8s-seed=node-k8s-seed:latest
+$ kubectl set image deployment/node-k8s-seed node-k8s-seed=node-k8s-seed:0.0.1-alpha-2
 ```
 
 Run the app again to view the changes
@@ -114,7 +110,7 @@ Run the app again to view the changes
 $ minikube service node-k8s-seed
 ```
 
-### Clean up
+## Clean up
 
 ```
 $ kubectl delete service node-k8s-seed
@@ -125,4 +121,18 @@ Optionally, stop Minikube
 
 ```
 $ minikube stop
+```
+
+## kubectl
+
+```
+$ kubectl create -f k8s/node-k8s-seed.yaml
+```
+
+```
+$ minikube service node-k8s-seed -n node-k8s-seed
+```
+
+```
+$ kubectl delete -f k8s/node-k8s-seed.yaml
 ```
